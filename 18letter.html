@@ -174,6 +174,9 @@
       background: #fafafa;
       border: 1px solid #eee;
       min-height: 200px;
+      /* Add these properties for scrolling */
+      max-height: 60vh;
+      overflow-y: auto;
     }
     
     footer {
@@ -343,9 +346,9 @@
       z-index: 2;
       opacity: 0;
       pointer-events: none;
-      white-space: pre-wrap;
+      /* Removed white-space: pre-wrap; to allow wrapping */
       line-height: 1.6;
-      overflow: auto; /* Allow scrolling for long letters */
+      overflow-y: auto; /* Add vertical scrollbar */
     }
     .envelope.open .letter {
       transform: translateY(-200px); /* Adjusted to go higher */
@@ -382,12 +385,10 @@
   </style>
 </head>
 <body>
-  <!-- Animations from index.html -->
   <div id="hearts-container"></div>
   <div class="background-hearts" id="background-hearts"></div>
   <div class="heading"></div>
 
-  <!-- Main content from x.html -->
   <div class="container">
     <header>
       <h1>Sweet 18 Letters ❤️</h1>
@@ -399,7 +400,6 @@
     </main>
   </div>
 
-  <!-- New Envelope animation -->
   <div class="envelope-container" id="envelopeContainer">
     <div class="envelope" id="envelope">
       <div class="envelope-back-flap"></div>
@@ -415,7 +415,6 @@
     </div>
   </div>
 
-  <!-- Modal from x.html -->
   <div class="modal" id="modal">
     <div class="sheet" role="dialog" aria-modal="true">
       <header>
