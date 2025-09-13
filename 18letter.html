@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sweet 18 Letters — For You</title>
   <style>
-    :root { 
-      --bg1: #ff9a9e; 
-      --bg2: #fecfef; 
-      --card: #fff; 
-      --accent: #e75480; 
-      --muted: #555; 
+    :root {
+      --bg1: #ff9a9e;
+      --bg2: #fecfef;
+      --card: #fff;
+      --accent: #e75480;
+      --muted: #555;
       --envelope-color: #fceef6; /* Light romantic pink */
       --envelope-flap: #e3d3d8;
       --envelope-shadow: rgba(0, 0, 0, 0.2);
@@ -20,7 +20,7 @@
       margin: 0;
       padding: 0;
     }
-    
+
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans', Arial;
       background: linear-gradient(135deg, var(--bg1), var(--bg2));
@@ -35,6 +35,15 @@
       position: relative;
     }
     
+    #bg-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
     .heading {
       position: absolute;
       top: 50px;
@@ -46,7 +55,7 @@
       text-align: center;
       animation: glow 2s ease-in-out infinite;
     }
-    
+
     @keyframes glow {
       0%, 100% { text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6); }
       50% { text-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 105, 180, 0.7); }
@@ -63,29 +72,29 @@
       margin-top: clamp(100px, 15vh, 150px);
       z-index: 5;
     }
-    
+
     header {
       text-align: center;
       margin-bottom: 20px;
     }
-    
+
     h1 {
       margin: 0;
       font-size: 26px;
     }
-    
+
     p.lead {
       margin: 6px 0 0;
       color: var(--muted);
     }
-    
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 14px;
       margin-top: 20px;
     }
-    
+
     .card {
       background: var(--card);
       border-radius: 14px;
@@ -99,24 +108,24 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 24px rgba(0,0,0,0.12);
     }
-    
+
     .num {
       font-size: 22px;
       font-weight: 700;
       color: var(--accent);
     }
-    
+
     .meta {
       font-size: 13px;
       color: var(--muted);
       margin-top: 6px;
     }
-    
+
     /* Modal */
     .modal {
       position: fixed;
@@ -128,11 +137,11 @@
       z-index: 60;
       background: rgba(0,0,0,0.4);
     }
-    
+
     .modal.show {
       display: flex;
     }
-    
+
     .sheet {
       width: 100%;
       max-width: 820px;
@@ -141,29 +150,29 @@
       padding: 22px;
       box-shadow: 0 30px 60px rgba(0,0,0,0.18);
     }
-    
+
     .sheet header {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    
+
     .sheet h2 {
       margin: 0;
       font-size: 20px;
     }
-    
+
     .close {
       font-size: 18px;
       background: transparent;
       border: 0;
       cursor: pointer;
     }
-    
+
     .content {
       margin-top: 12px;
     }
-    
+
     .view {
       white-space: pre-wrap;
       line-height: 1.6;
@@ -174,11 +183,10 @@
       background: #fafafa;
       border: 1px solid #eee;
       min-height: 200px;
-      /* Add these properties for scrolling */
       max-height: 60vh;
       overflow-y: auto;
     }
-    
+
     footer {
       display: flex;
       gap: 8px;
@@ -186,7 +194,7 @@
       align-items: center;
       margin-top: 14px;
     }
-    
+
     button {
       background: var(--accent);
       color: #fff;
@@ -195,89 +203,14 @@
       border-radius: 10px;
       cursor: pointer;
     }
-    
+
     .secondary {
       background: transparent;
       color: var(--accent);
       border: 1px solid var(--accent);
     }
 
-    /* Background animations from index.html */
-    #hearts-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .floating-text {
-      position: absolute;
-      color: rgba(255, 105, 180, 0.5);
-      font-family: 'Brush Script MT', cursive;
-      font-size: 1.8rem;
-      pointer-events: none;
-      opacity: 0;
-      z-index: 2;
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
-    }
-    
-    .sparkle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background-color: white;
-      border-radius: 50%;
-      box-shadow: 0 0 10px 2px rgba(255, 223, 196, 0.8);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .background-hearts {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-    
-    .background-heart {
-      position: absolute;
-      font-size: 3rem;
-      color: rgba(255, 255, 255, 0.2);
-      animation: pulse 4s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.2; }
-      50% { transform: scale(1.1); opacity: 0.3; }
-    }
-    
-    .rose-petal {
-      position: absolute;
-      width: 20px;
-      height: 30px;
-      background-color: rgba(219, 112, 147, 0.4);
-      border-radius: 50% 0 50% 50%;
-      transform: rotate(45deg);
-      pointer-events: none;
-      z-index: 1;
-      animation: fall 10s linear forwards;
-    }
-    
-    @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(45deg); opacity: 0.8; }
-      80% { opacity: 0.6; }
-      100% { transform: translateY(110vh) rotate(180deg); opacity: 0; }
-    }
-
-    /* New Envelope Design */
+    /* Envelope Design */
     .envelope-container {
       position: fixed;
       inset: 0;
@@ -311,10 +244,10 @@
       height: 110px;
       z-index: 3;
       transform-origin: top;
-      transition: transform 1.5s ease-in-out; /* Slower and smoother */
+      transition: transform 1.5s ease-in-out;
       overflow: hidden;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
-      background: #f7a5b3; /* A beautiful rose gold */
+      background: #f7a5b3;
     }
     .envelope.open .envelope-flap {
       transform: rotateX(180deg);
@@ -330,7 +263,6 @@
       clip-path: polygon(0 100%, 100% 100%, 50% 0);
       background: #f7a5b3;
     }
-    /* FIX: Adjusted the letter position and animation */
     .letter {
       position: absolute;
       top: 10px;
@@ -346,12 +278,11 @@
       z-index: 2;
       opacity: 0;
       pointer-events: none;
-      /* Removed white-space: pre-wrap; to allow wrapping */
       line-height: 1.6;
-      overflow-y: auto; /* Add vertical scrollbar */
+      overflow-y: auto;
     }
     .envelope.open .letter {
-      transform: translateY(-200px); /* Adjusted to go higher */
+      transform: translateY(-200px);
       opacity: 1;
       pointer-events: auto;
     }
@@ -385,8 +316,7 @@
   </style>
 </head>
 <body>
-  <div id="hearts-container"></div>
-  <div class="background-hearts" id="background-hearts"></div>
+  <canvas id="bg-canvas"></canvas>
   <div class="heading"></div>
 
   <div class="container">
@@ -497,9 +427,9 @@ Bunny 💖
         setTimeout(() => {
           envelope.classList.add('open');
         }, 50); // Small delay for effect
-        
+
         // FIX: Increased the delay to allow the letter animation to complete fully
-        setTimeout(openLetterInModal, 2000); 
+        setTimeout(openLetterInModal, 2000);
     }
 
     function openLetterInModal() {
@@ -514,118 +444,95 @@ Bunny 💖
     }
 
     closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { 
-      if(e.target === modal) closeModal(); 
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) closeModal();
     });
 
-    prevBtn.addEventListener('click', () => { 
+    prevBtn.addEventListener('click', () => {
       if(current > 1) {
           openEnvelope(current - 1);
       }
     });
-    nextBtn.addEventListener('click', () => { 
+    nextBtn.addEventListener('click', () => {
       if(current < TOTAL) {
-        openEnvelope(current + 1); 
+        openEnvelope(current + 1);
       }
     });
 
     renderGrid();
 
-    // Background animations
-    const heartsContainer = document.getElementById('hearts-container');
-    const backgroundHearts = document.getElementById('background-hearts');
+    // Canvas-based background animations
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleColors = ['#ff9a9e', '#fecfef', '#e75480', '#fff'];
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.innerHTML = '❤';
-      heart.style.position = 'absolute';
-      heart.style.fontSize = Math.random() * 15 + 10 + 'px';
-      heart.style.color = `rgba(255, ${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 150)}, ${Math.random() * 0.5 + 0.3})`;
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.top = '-20px';
-      heart.style.opacity = Math.random() * 0.5 + 0.5;
-      heart.style.zIndex = '1';
-      heart.style.pointerEvents = 'none';
-      heart.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
-      
-      const animationDuration = Math.random() * 5 + 8;
-      const horizontalSwing = Math.random() * 20 - 10;
-      
-      heart.animate([
-        { transform: `translateY(0) translateX(0) rotate(${Math.random() * 60 - 30}deg)` },
-        { transform: `translateY(30vh) translateX(${horizontalSwing}px) rotate(${Math.random() * 60 - 30}deg)` },
-        { transform: `translateY(60vh) translateX(${-horizontalSwing}px) rotate(${Math.random() * 60 - 30}deg)` },
-        { transform: `translateY(110vh) translateX(${horizontalSwing}px) rotate(${Math.random() * 60 - 30}deg)` }
-      ], {
-        duration: animationDuration * 1000,
-        easing: 'linear'
-      });
-      
-      heartsContainer.appendChild(heart);
-      
-      setTimeout(() => {
-        heart.remove();
-      }, animationDuration * 1000);
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
     
-    setInterval(createHeart, 300);
+    function createParticles() {
+        for(let i = 0; i < 50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                color: particleColors[Math.floor(Math.random() * particleColors.length)]
+            });
+        }
+    }
 
-    const messages = ["Miss you", "Love you"];
-    function createFloatingText() {
-      const text = document.createElement('div');
-      text.classList.add('floating-text');
-      text.textContent = messages[Math.floor(Math.random() * messages.length)];
-      text.style.left = Math.random() * 80 + 10 + 'vw';
-      text.style.top = Math.random() * 80 + 10 + 'vh';
-      
-      document.body.appendChild(text);
-      
-      setTimeout(() => { text.style.opacity = 0.7; }, 100);
-      setTimeout(() => { text.style.opacity = 0; }, 3000);
-      setTimeout(() => { text.remove(); }, 4000);
+    function updateParticles() {
+        for(let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.speedX;
+            p.y += p.speedY;
+
+            // Loop particles back to the screen
+            if (p.x > canvas.width || p.x < 0) p.speedX *= -1;
+            if (p.y > canvas.height || p.y < 0) p.speedY *= -1;
+
+            // Reduce opacity over time
+            p.opacity = Math.max(0, p.opacity - 0.005);
+            
+            // Re-create faded particles
+            if (p.opacity <= 0.1) {
+                p.x = Math.random() * canvas.width;
+                p.y = Math.random() * canvas.height;
+                p.opacity = Math.random() * 0.8 + 0.2;
+            }
+        }
     }
-    
-    setInterval(createFloatingText, 2000);
-    
-    function createSparkle() {
-      const sparkle = document.createElement('div');
-      sparkle.classList.add('sparkle');
-      sparkle.style.left = Math.random() * 100 + 'vw';
-      sparkle.style.top = Math.random() * 100 + 'vh';
-      
-      document.body.appendChild(sparkle);
-      
-      setTimeout(() => { sparkle.style.opacity = 0.8; }, 100);
-      setTimeout(() => { sparkle.style.opacity = 0; }, 1500);
-      setTimeout(() => { sparkle.remove(); }, 2000);
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.7)';
+
+        for(let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-    
-    setInterval(createSparkle, 200);
-    
-    for (let i = 0; i < 20; i++) {
-      const heart = document.createElement('div');
-      heart.innerHTML = '❤';
-      heart.classList.add('background-heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.top = Math.random() * 100 + 'vh';
-      heart.style.animationDelay = Math.random() * 4 + 's';
-      backgroundHearts.appendChild(heart);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        updateParticles();
+        drawParticles();
     }
-    
-    function createRosePetal() {
-      const petal = document.createElement('div');
-      petal.classList.add('rose-petal');
-      petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.opacity = Math.random() * 0.3 + 0.3;
-      
-      document.body.appendChild(petal);
-      
-      setTimeout(() => {
-        petal.remove();
-      }, 10000);
-    }
-    
-    setInterval(createRosePetal, 1000);
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('load', () => {
+      resizeCanvas();
+      createParticles();
+      animate();
+    });
   </script>
 </body>
 </html>
