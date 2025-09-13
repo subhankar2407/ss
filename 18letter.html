@@ -372,7 +372,6 @@
     const nextBtn = document.getElementById('next');
     const envelopeContainer = document.getElementById('envelopeContainer');
     const envelope = document.getElementById('envelope');
-    const letterEl = document.querySelector('.letter');
 
     let current = 1;
 
@@ -421,15 +420,20 @@ Bunny 💖
 
     function openEnvelope(i) {
         current = i;
-        letterEl.textContent = LETTERS[current - 1] || '(Letter not added yet)';
         envelopeContainer.style.display = 'flex';
         envelope.classList.remove('open');
+        
+        // Listen for the end of the flap animation to show the modal
+        const onTransitionEnd = () => {
+          openLetterInModal();
+          envelope.removeEventListener('transitionend', onTransitionEnd);
+        };
+        envelope.addEventListener('transitionend', onTransitionEnd);
+
+        // A small delay to ensure CSS transition resets before starting
         setTimeout(() => {
           envelope.classList.add('open');
-        }, 50); // Small delay for effect
-
-        // FIX: Increased the delay to allow the letter animation to complete fully
-        setTimeout(openLetterInModal, 2000);
+        }, 50);
     }
 
     function openLetterInModal() {
@@ -480,7 +484,8 @@ Bunny 💖
                 size: Math.random() * 2 + 1,
                 speedX: (Math.random() - 0.5) * 0.5,
                 speedY: (Math.random() - 0.5) * 0.5,
-                color: particleColors[Math.floor(Math.random() * particleColors.length)]
+                color: particleColors[Math.floor(Math.random() * particleColors.length)],
+                opacity: Math.random() * 0.8 + 0.2 // Initial opacity
             });
         }
     }
@@ -494,24 +499,12 @@ Bunny 💖
             // Loop particles back to the screen
             if (p.x > canvas.width || p.x < 0) p.speedX *= -1;
             if (p.y > canvas.height || p.y < 0) p.speedY *= -1;
-
-            // Reduce opacity over time
-            p.opacity = Math.max(0, p.opacity - 0.005);
-            
-            // Re-create faded particles
-            if (p.opacity <= 0.1) {
-                p.x = Math.random() * canvas.width;
-                p.y = Math.random() * canvas.height;
-                p.opacity = Math.random() * 0.8 + 0.2;
-            }
         }
     }
 
     function drawParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(255, 255, 255, 0.7)';
-
+        
         for(let i = 0; i < particles.length; i++) {
             const p = particles[i];
             ctx.fillStyle = p.color;
